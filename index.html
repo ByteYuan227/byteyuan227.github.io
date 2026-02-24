@@ -422,6 +422,21 @@
     50% { transform: scale(1.12); }
   }
 
+  /* Scroll reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal.reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal.reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal.reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal.reveal-delay-4 { transition-delay: 0.4s; }
+
   @media (max-width: 900px) {
     #hero { grid-template-columns: 1fr; padding-top: 7rem; }
     .hero-right { display: none; }
@@ -490,7 +505,7 @@
 </div>
 
 <!-- ABOUT -->
-<div class="section-wrap" id="about">
+<div class="section-wrap reveal" id="about">
 <section>
   <div class="section-label">01 — About</div>
   <h2>A little about <em>me</em></h2>
@@ -545,7 +560,7 @@
 </div>
 
 <!-- EXPERIENCE -->
-<div class="section-wrap" id="experience">
+<div class="section-wrap reveal" id="experience">
 <section>
   <div class="section-label">02 — Experience</div>
   <h2>Where I've <em>worked</em></h2>
@@ -629,7 +644,7 @@
 </div>
 
 <!-- PROJECTS -->
-<div class="section-wrap" id="projects">
+<div class="section-wrap reveal" id="projects">
 <section>
   <div class="section-label">03 — Projects</div>
   <h2>Things I've <em>built</em></h2>
@@ -686,7 +701,7 @@
 </div>
 
 <!-- SKILLS -->
-<div class="section-wrap" id="skills">
+<div class="section-wrap reveal" id="skills">
 <section>
   <div class="section-label">04 — Skills</div>
   <h2>My <em>toolkit</em></h2>
@@ -752,7 +767,7 @@
 </div>
 
 <!-- EDUCATION -->
-<div class="section-wrap" id="education">
+<div class="section-wrap reveal" id="education">
 <section>
   <div class="section-label">05 — Education</div>
   <h2>Where I <em>studied</em></h2>
@@ -771,7 +786,7 @@
 </div>
 
 <!-- CONTACT -->
-<div class="section-wrap" id="contact">
+<div class="section-wrap reveal" id="contact">
   <div class="contact-center">
     <div class="section-label">06 — Contact</div>
     <h2 style="font-size: clamp(2rem, 5vw, 3.8rem); margin-bottom: 1.2rem;">Let's work<br><em>together</em></h2>
@@ -791,8 +806,16 @@
 </footer>
 
 <script>
-  // Blob animation only — no visibility-dependent JS
-  // All content is visible by default via CSS
+  // Scroll reveal animation
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  reveals.forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
