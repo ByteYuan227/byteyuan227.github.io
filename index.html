@@ -88,6 +88,39 @@
   }
   .lang-toggle:hover { color: var(--lime); border-color: var(--lime); }
 
+  /* Page loader */
+  #page-loader {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    z-index: 10001;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  #page-loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+  .loader-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border);
+    border-top-color: var(--lime);
+    border-radius: 50%;
+    animation: loader-spin 0.8s linear infinite;
+  }
+  .loader-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  @keyframes loader-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .loader-spinner { animation: none; border-top-color: var(--lime); }
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
@@ -254,6 +287,13 @@
     display: block;
   }
 
+  .hero-tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--lime);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.8rem;
+  }
   .hero-sub {
     font-size: 1.05rem;
     line-height: 1.75;
@@ -661,7 +701,8 @@
   }
   .contact-center .section-label { justify-content: center; }
   .contact-center .section-label::after { display: none; }
-  .contact-blurb { color: var(--muted); font-size: 0.98rem; line-height: 1.8; margin-bottom: 2.5rem; }
+  .contact-blurb { color: var(--muted); font-size: 0.98rem; line-height: 1.8; margin-bottom: 1rem; }
+  .contact-open-to { color: var(--text-soft); font-size: 0.85rem; line-height: 1.6; margin-bottom: 2.5rem; font-family: 'DM Mono', monospace; }
   .contact-email {
     font-family: 'Syne', sans-serif;
     font-size: clamp(1.1rem, 2.5vw, 1.7rem);
@@ -719,6 +760,16 @@
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .blob, .blob-1, .blob-2, .blob-3, .blob-4 { animation: none; }
+    .code-card .code-line { animation: none; opacity: 1; }
+    .code-cursor { animation: none; opacity: 1; }
+    .mouse-glow, .custom-cursor, .cursor-dot { transition: none; }
+    .stat-card:hover, .pcard:hover, .edu-card:hover { transform: none; }
+  }
+
   @media (max-width: 768px) {
     .nav-end { gap: 1rem; }
     .nav-hamburger { display: flex; }
@@ -761,12 +812,16 @@
 </style>
 </head>
 <body>
+<div id="page-loader" aria-hidden="true">
+  <div class="loader-spinner"></div>
+  <span class="loader-text">Loading</span>
+</div>
 <div class="mouse-glow" id="mouseGlow" aria-hidden="true"></div>
 <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
 <!-- NAV -->
-<nav>
+<nav aria-label="Main navigation">
   <div class="nav-logo">MY.</div>
   <div class="nav-end">
     <div class="nav-links" id="navLinks">
@@ -795,10 +850,12 @@
       <span class="name-solid">Mu</span>
       <span class="name-outline">Yuan</span>
     </h1>
+    <p class="hero-tagline" data-i18n="hero_tagline">Building AI systems that ship.</p>
     <p class="hero-sub" data-i18n="hero_sub">Software engineer specializing in large language models, RAG systems, and edge-cloud AI agent architecture. I build systems that are fast, intelligent, and production-ready.</p>
     <div class="hero-btns">
-      <a href="#contact" class="btn btn-primary" data-i18n="btn_contact">Get in touch</a>
-      <a href="#projects" class="btn btn-outline" data-i18n="btn_work">View my work</a>
+      <a href="#contact" class="btn btn-primary" data-i18n="btn_contact" aria-label="Get in touch">Get in touch</a>
+      <a href="#projects" class="btn btn-outline" data-i18n="btn_work" aria-label="View my projects">View my work</a>
+      <a href="resume.pdf" class="btn btn-outline" data-i18n="btn_cv" download aria-label="Download resume PDF">Download CV</a>
     </div>
   </div>
   <div class="hero-right">
@@ -1159,12 +1216,13 @@
     <div class="section-label" data-i18n="contact_label">06 — Contact</div>
     <h2 style="font-size: clamp(2rem, 5vw, 3.8rem); margin-bottom: 1.2rem;" data-i18n-html="contact_h2">Let's work<br><em>together</em></h2>
     <p class="contact-blurb" data-i18n="contact_blurb">Open to AI/ML research roles, software engineering internships, and new grad opportunities. Whether you have a project in mind or just want to connect — my inbox is always open.</p>
-    <a href="mailto:vincentyuan227@gmail.com" class="contact-email">vincentyuan227@gmail.com</a>
+    <p class="contact-open-to" data-i18n="contact_open_to">Open to: Summer 2026 internships · Full-time from Dec 2026 · Remote or onsite · Location flexible.</p>
+    <a href="mailto:vincentyuan227@gmail.com" class="contact-email" aria-label="Email me at vincentyuan227@gmail.com">vincentyuan227@gmail.com</a>
     <div class="socials">
-      <a href="https://github.com/ByteYuan227" target="_blank" rel="noopener noreferrer" class="social-link" data-i18n="link_github">↗ GitHub</a>
-      <a href="https://www.linkedin.com/in/mu-yuan227/" target="_blank" rel="noopener noreferrer" class="social-link">↗ LinkedIn</a>
-      <a href="mailto:vincentyuan227@gmail.com" class="social-link" data-i18n="contact_email">↗ Email</a>
-      <a href="tel:2409303436" class="social-link" data-i18n="contact_phone">↗ (240) 930-3436</a>
+      <a href="https://github.com/ByteYuan227" target="_blank" rel="noopener noreferrer" class="social-link" data-i18n="link_github" aria-label="GitHub profile">↗ GitHub</a>
+      <a href="https://www.linkedin.com/in/mu-yuan227/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn profile">↗ LinkedIn</a>
+      <a href="mailto:vincentyuan227@gmail.com" class="social-link" data-i18n="contact_email" aria-label="Send email">↗ Email</a>
+      <a href="tel:2409303436" class="social-link" data-i18n="contact_phone" aria-label="Call (240) 930-3436">↗ (240) 930-3436</a>
     </div>
   </div>
 </div>
@@ -1205,7 +1263,8 @@
         nav_about: "About", nav_exp: "Experience", nav_projects: "Projects", nav_skills: "Skills", nav_edu: "Education", nav_contact: "Contact",
         hero_tag: "AI / ML · Backend Engineer · UMD CS '26",
         hero_sub: "Software engineer specializing in large language models, RAG systems, and edge-cloud AI agent architecture. I build systems that are fast, intelligent, and production-ready.",
-        btn_contact: "Get in touch", btn_work: "View my work",
+        btn_contact: "Get in touch", btn_work: "View my work", btn_cv: "Download CV",
+        hero_tagline: "Building AI systems that ship.",
         about_label: "01 — About", about_h2: "A little about <em>me</em>",
         about_p1: "Hi, I'm Mu Yuan — a Computer Science student at the University of Maryland, College Park with a minor in Business Administration, graduating December 2026.",
         about_p2: "My work sits at the intersection of systems engineering and AI: I build efficient LLM inference pipelines, retrieval-augmented generation systems, and edge-cloud agent architectures that are fast and reliable in production.",
@@ -1270,6 +1329,7 @@
         edu_detail: "<span class=\"hl\">2024 OMSE Academic Excellence Award</span> · <span class=\"hl\">2024–2025 Dean's List</span><br><br>Graduate-level coursework in Multimodal Deep Learning and QA Systems, alongside core CS curriculum spanning AI, ML, Computer Vision, Distributed Systems, and Operating Systems.",
         contact_label: "06 — Contact", contact_h2: "Let's work<br><em>together</em>",
         contact_blurb: "Open to AI/ML research roles, software engineering internships, and new grad opportunities. Whether you have a project in mind or just want to connect — my inbox is always open.",
+        contact_open_to: "Open to: Summer 2026 internships · Full-time from Dec 2026 · Remote or onsite · Location flexible.",
         contact_email: "↗ Email", contact_phone: "↗ (240) 930-3436",
         footer1: "© 2026 Mu Yuan",
         footer2: "CS @ University of Maryland, College Park"
@@ -1279,8 +1339,9 @@
         theme_btn: "浅色", theme_btn_alt: "深色",
         nav_about: "关于", nav_exp: "经历", nav_projects: "项目", nav_skills: "技能", nav_edu: "教育", nav_contact: "联系",
         hero_tag: "AI / ML · 后端工程师 · UMD CS '26",
+        hero_tagline: "构建可落地的 AI 系统。",
         hero_sub: "专注于大语言模型、RAG 系统与边云协同 AI 智能体架构的软件工程师，构建快速、智能且可用于生产环境的系统。",
-        btn_contact: "联系我", btn_work: "查看作品",
+        btn_contact: "联系我", btn_work: "查看作品", btn_cv: "下载简历",
         about_label: "01 — 关于", about_h2: "关于我",
         about_p1: "你好，我是穆远，马里兰大学帕克分校计算机科学专业学生，辅修工商管理，预计 2026 年 12 月毕业。",
         about_p2: "我的工作聚焦于系统与 AI 的交叉：构建高效的 LLM 推理管线、检索增强生成（RAG）系统以及边云智能体架构，追求在生产环境中快速、可靠。",
@@ -1345,6 +1406,7 @@
         edu_detail: "<span class=\"hl\">2024 OMSE 学术优秀奖</span> · <span class=\"hl\">2024–2025 院长名单</span><br><br>研究生课程：Multimodal Deep Learning、QA Systems；核心 CS 课程涵盖 AI、ML、Computer Vision、Distributed Systems、Operating Systems。",
         contact_label: "06 — 联系", contact_h2: "一起合作",
         contact_blurb: "开放 AI/ML 研究、软件工程实习及应届岗位机会。无论你有项目想法或只想交流，欢迎来信。",
+        contact_open_to: "开放：2026 暑期实习 · 2026 年 12 月起全职 · 远程或 onsite · 地区不限。",
         contact_email: "↗ 邮箱", contact_phone: "↗ (240) 930-3436",
         footer1: "© 2026 穆远",
         footer2: "CS @ University of Maryland, College Park"
@@ -1404,11 +1466,11 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
   reveals.forEach(el => observer.observe(el));
 
-  // Mouse-following glow
+  // Mouse-following glow (skip if reduced motion)
   const glow = document.getElementById('mouseGlow');
   let glowX = 0, glowY = 0;
   let targetX = 0, targetY = 0;
-  if (glow) {
+  if (glow && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.addEventListener('mousemove', (e) => {
       targetX = e.clientX;
       targetY = e.clientY;
@@ -1423,10 +1485,18 @@
     animateGlow();
   }
 
-  // 3D tilt cards
+  // Page loader: hide when ready
+  window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+    var loader = document.getElementById('page-loader');
+    if (loader) loader.classList.add('done');
+  });
+
+  // 3D tilt cards (skip if user prefers reduced motion)
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const tiltCards = document.querySelectorAll('.stat-card, .pcard, .edu-card, .code-card');
   const tiltAmount = 12;
-  tiltCards.forEach(card => {
+  if (!prefersReducedMotion) tiltCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
@@ -1440,12 +1510,13 @@
     });
   });
 
+
   // Custom cursor
   const cursor = document.getElementById('customCursor');
   const cursorDot = document.getElementById('cursorDot');
   let curX = 0, curY = 0;
   let dotX = 0, dotY = 0;
-  if (cursor && cursorDot && window.matchMedia('(hover: hover)').matches) {
+  if (cursor && cursorDot && window.matchMedia('(hover: hover)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.addEventListener('mousemove', (e) => {
       curX = e.clientX;
       curY = e.clientY;
