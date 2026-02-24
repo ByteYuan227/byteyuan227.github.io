@@ -74,6 +74,19 @@
     transition: all 0.2s;
   }
   .theme-toggle:hover { color: var(--lime); border-color: var(--lime); }
+  .lang-toggle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-toggle:hover { color: var(--lime); border-color: var(--lime); }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -743,7 +756,7 @@
       font-size: 0.85rem;
     }
     .nav-links a:last-child { border-bottom: none; }
-    .nav-right .theme-toggle { font-size: 0.68rem; padding: 0.35rem 0.65rem; }
+    .nav-right .theme-toggle, .nav-right .lang-toggle { font-size: 0.68rem; padding: 0.35rem 0.65rem; }
   }
 </style>
 </head>
@@ -757,15 +770,16 @@
   <div class="nav-logo">MY.</div>
   <div class="nav-end">
     <div class="nav-links" id="navLinks">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#experience" data-i18n="nav_exp">Experience</a>
+      <a href="#projects" data-i18n="nav_projects">Projects</a>
+      <a href="#skills" data-i18n="nav_skills">Skills</a>
+      <a href="#education" data-i18n="nav_edu">Education</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
     </div>
     <div class="nav-right">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">Light</button>
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language">中文</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" data-i18n="theme_btn">Light</button>
       <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -776,17 +790,15 @@
 <!-- HERO -->
 <div id="hero">
   <div class="hero-left">
-    <div class="hero-tag">AI / ML · Backend Engineer · UMD CS '26</div>
+    <div class="hero-tag" data-i18n="hero_tag">AI / ML · Backend Engineer · UMD CS '26</div>
     <h1>
       <span class="name-solid">Mu</span>
       <span class="name-outline">Yuan</span>
     </h1>
-    <p class="hero-sub">
-      Software engineer specializing in large language models, RAG systems, and edge-cloud AI agent architecture. I build systems that are fast, intelligent, and production-ready.
-    </p>
+    <p class="hero-sub" data-i18n="hero_sub">Software engineer specializing in large language models, RAG systems, and edge-cloud AI agent architecture. I build systems that are fast, intelligent, and production-ready.</p>
     <div class="hero-btns">
-      <a href="#contact" class="btn btn-primary">Get in touch</a>
-      <a href="#projects" class="btn btn-outline">View my work</a>
+      <a href="#contact" class="btn btn-primary" data-i18n="btn_contact">Get in touch</a>
+      <a href="#projects" class="btn btn-outline" data-i18n="btn_work">View my work</a>
     </div>
   </div>
   <div class="hero-right">
@@ -813,13 +825,13 @@
 <!-- ABOUT -->
 <div class="section-wrap reveal" id="about">
 <section>
-  <div class="section-label">01 — About</div>
-  <h2>A little about <em>me</em></h2>
+  <div class="section-label" data-i18n="about_label">01 — About</div>
+  <h2 data-i18n-html="about_h2">A little about <em>me</em></h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>Hi, I'm <strong>Mu Yuan</strong> — a Computer Science student at the <strong>University of Maryland, College Park</strong> with a minor in Business Administration, graduating December 2026.</p>
-      <p>My work sits at the intersection of systems engineering and AI: I build efficient LLM inference pipelines, retrieval-augmented generation systems, and edge-cloud agent architectures that are fast and reliable in production.</p>
-      <p>Recognized with the <strong>2024 OMSE Academic Excellence Award</strong> and named to the <strong>2024–2025 Dean's List</strong>.</p>
+      <p data-i18n="about_p1">Hi, I'm <strong>Mu Yuan</strong> — a Computer Science student at the <strong>University of Maryland, College Park</strong> with a minor in Business Administration, graduating December 2026.</p>
+      <p data-i18n="about_p2">My work sits at the intersection of systems engineering and AI: I build efficient LLM inference pipelines, retrieval-augmented generation systems, and edge-cloud agent architectures that are fast and reliable in production.</p>
+      <p data-i18n="about_p3">Recognized with the <strong>2024 OMSE Academic Excellence Award</strong> and named to the <strong>2024–2025 Dean's List</strong>.</p>
       <div class="contact-info">
         <span>📞 (240) 930-3436</span>
         <span>✉️ <a href="mailto:vincentyuan227@gmail.com">vincentyuan227@gmail.com</a></span>
@@ -827,7 +839,7 @@
         <span>📍 College Park, MD</span>
       </div>
       <div class="courses-block">
-        <h4>Relevant Coursework</h4>
+        <h4 data-i18n="about_courses">Relevant Coursework</h4>
         <div class="course-pills">
           <span class="cpill grad">Multimodal Deep Learning (Grad)</span>
           <span class="cpill grad">QA Systems (Grad)</span>
@@ -846,19 +858,19 @@
     <div class="about-stats">
       <div class="stat-card">
         <div class="stat-num">🥇</div>
-        <div class="stat-label">Google DeepMind Hackathon — DC Region #1 (objective score)</div>
+        <div class="stat-label" data-i18n="stat1">Google DeepMind Hackathon — DC Region #1 (objective score)</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">95%+</div>
-        <div class="stat-label">Local task processing on edge-cloud agent system</div>
+        <div class="stat-label" data-i18n="stat2">Local task processing on edge-cloud agent system</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">76%</div>
-        <div class="stat-label">Recall on RAG-based QA agent</div>
+        <div class="stat-label" data-i18n="stat3">Recall on RAG-based QA agent</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">+15%</div>
-        <div class="stat-label">Accuracy boost on thermal imaging classifier</div>
+        <div class="stat-label" data-i18n="stat4">Accuracy boost on thermal imaging classifier</div>
       </div>
     </div>
   </div>
@@ -868,22 +880,22 @@
 <!-- EXPERIENCE -->
 <div class="section-wrap reveal" id="experience">
 <section>
-  <div class="section-label">02 — Experience</div>
-  <h2>Where I've <em>worked</em></h2>
+  <div class="section-label" data-i18n="exp_label">02 — Experience</div>
+  <h2 data-i18n-html="exp_h2">Where I've <em>worked</em></h2>
   <div class="timeline">
 
     <!-- ByteDance -->
     <div class="job">
-      <div class="job-period">Jun 2025 — Aug 2025<br>Remote</div>
+      <div class="job-period" data-i18n-html="job1_period">Jun 2025 — Aug 2025<br>Remote</div>
       <div>
-        <div class="job-company">BYTEDANCE</div>
-        <div class="job-title">Software Engineering Intern — Backend</div>
+        <div class="job-company" data-i18n="job1_company">BYTEDANCE</div>
+        <div class="job-title" data-i18n="job1_title">Software Engineering Intern — Backend</div>
         <ul class="bullets">
-          <li>Designed and developed scalable RESTful APIs for a high-traffic distributed order management system using Java and Spring Boot, reliably supporting high concurrent requests during peak transactional periods.</li>
-          <li>Optimized database performance by analyzing slow SQL execution plans and implementing a distributed Redis caching layer, reducing average API read latency by <strong>40%</strong> and significantly lowering primary database load.</li>
-          <li>Engineered asynchronous data pipelines using Apache Kafka to decouple non-core business logic (notification dispatch, logging) from the main transaction flow, enhancing system fault tolerance and response times.</li>
-          <li>Authored comprehensive test suites with JUnit and Mockito, achieving <strong>85%+ code coverage</strong> and ensuring seamless integration with the automated CI/CD deployment pipeline.</li>
-          <li>Participated in production troubleshooting via system monitoring and log analysis, gaining hands-on experience with JVM memory tuning and thread pool optimization to resolve intermittent performance bottlenecks.</li>
+          <li data-i18n="job1_b1">Designed and developed scalable RESTful APIs for a high-traffic distributed order management system using Java and Spring Boot, reliably supporting high concurrent requests during peak transactional periods.</li>
+          <li data-i18n="job1_b2">Optimized database performance by analyzing slow SQL execution plans and implementing a distributed Redis caching layer, reducing average API read latency by <strong>40%</strong> and significantly lowering primary database load.</li>
+          <li data-i18n="job1_b3">Engineered asynchronous data pipelines using Apache Kafka to decouple non-core business logic (notification dispatch, logging) from the main transaction flow, enhancing system fault tolerance and response times.</li>
+          <li data-i18n="job1_b4">Authored comprehensive test suites with JUnit and Mockito, achieving <strong>85%+ code coverage</strong> and ensuring seamless integration with the automated CI/CD deployment pipeline.</li>
+          <li data-i18n="job1_b5">Participated in production troubleshooting via system monitoring and log analysis, gaining hands-on experience with JVM memory tuning and thread pool optimization to resolve intermittent performance bottlenecks.</li>
         </ul>
         <div class="tags">
           <span class="tag tl">Java</span>
@@ -899,18 +911,18 @@
 
     <!-- Everstay Tech -->
     <div class="job">
-      <div class="job-period">May 2024 — Aug 2024<br>Shenzhen, CN</div>
+      <div class="job-period" data-i18n-html="job2_period">May 2024 — Aug 2024<br>Shenzhen, CN</div>
       <div>
-        <div class="job-company">EVERSTAY TECH</div>
-        <div class="job-title">Machine Learning Intern</div>
+        <div class="job-company" data-i18n="job2_company">EVERSTAY TECH</div>
+        <div class="job-title" data-i18n="job2_title">Machine Learning Intern</div>
         <ul class="bullets">
-          <li>Built a multimodal LLM reranker with PyTorch and JAX, improving relevance on production benchmarks and evaluation.</li>
-          <li>Applied image and video tokenization to compress inputs, boosting throughput and reducing GPU memory usage.</li>
-          <li>Implemented instruction-tuning and DPO/IPO pipelines, increasing helpfulness and factuality under evaluation metrics.</li>
-          <li>Optimized decoding with KV cache and speculative decoding, significantly reducing p95 latency under production workloads.</li>
-          <li>Designed experiments and statistical analyses, running A/B tests with confidence intervals and calibration metrics.</li>
-          <li>Integrated open-vocabulary understanding and safety guardrails, strengthening multimodal reliability in production systems.</li>
-          <li>Collaborated cross-functionally with product and infrastructure teams, delivering reproducible pipelines and evaluation suites.</li>
+          <li data-i18n="job2_b1">Built a multimodal LLM reranker with PyTorch and JAX, improving relevance on production benchmarks and evaluation.</li>
+          <li data-i18n="job2_b2">Applied image and video tokenization to compress inputs, boosting throughput and reducing GPU memory usage.</li>
+          <li data-i18n="job2_b3">Implemented instruction-tuning and DPO/IPO pipelines, increasing helpfulness and factuality under evaluation metrics.</li>
+          <li data-i18n="job2_b4">Optimized decoding with KV cache and speculative decoding, significantly reducing p95 latency under production workloads.</li>
+          <li data-i18n="job2_b5">Designed experiments and statistical analyses, running A/B tests with confidence intervals and calibration metrics.</li>
+          <li data-i18n="job2_b6">Integrated open-vocabulary understanding and safety guardrails, strengthening multimodal reliability in production systems.</li>
+          <li data-i18n="job2_b7">Collaborated cross-functionally with product and infrastructure teams, delivering reproducible pipelines and evaluation suites.</li>
         </ul>
         <div class="tags">
           <span class="tag tl">PyTorch</span>
@@ -926,13 +938,13 @@
 
     <!-- Aerodynamics Lab -->
     <div class="job">
-      <div class="job-period">Sep 2022 — Jan 2023</div>
+      <div class="job-period" data-i18n="job3_period">Sep 2022 — Jan 2023</div>
       <div>
-        <div class="job-company">AERODYNAMICS LABORATORY</div>
-        <div class="job-title">Research Assistant</div>
+        <div class="job-company" data-i18n="job3_company">AERODYNAMICS LABORATORY</div>
+        <div class="job-title" data-i18n="job3_title">Research Assistant</div>
         <ul class="bullets">
-          <li>Independently developed a Python-based standardized data preprocessing pipeline for cleaning and annotating 5,000+ infrared images; introduced domain-specific data augmentation that tripled the training dataset, substantially improving model generalization.</li>
-          <li>Built a reproducible ML training workflow with automated performance evaluation tooling (confusion matrix + mAP metrics), driving a <strong>15% accuracy improvement</strong> on a thermal imaging classification model and significantly shortening algorithm iteration cycles.</li>
+          <li data-i18n="job3_b1">Independently developed a Python-based standardized data preprocessing pipeline for cleaning and annotating 5,000+ infrared images; introduced domain-specific data augmentation that tripled the training dataset, substantially improving model generalization.</li>
+          <li data-i18n="job3_b2">Built a reproducible ML training workflow with automated performance evaluation tooling (confusion matrix + mAP metrics), driving a <strong>15% accuracy improvement</strong> on a thermal imaging classification model and significantly shortening algorithm iteration cycles.</li>
         </ul>
         <div class="tags">
           <span class="tag tl">Python</span>
@@ -952,16 +964,16 @@
 <!-- PROJECTS -->
 <div class="section-wrap reveal" id="projects">
 <section>
-  <div class="section-label">03 — Projects</div>
-  <h2>Things I've <em>built</em></h2>
+  <div class="section-label" data-i18n="proj_label">03 — Projects</div>
+  <h2 data-i18n-html="proj_h2">Things I've <em>built</em></h2>
   <div class="projects-grid">
 
     <!-- Featured -->
     <div class="pcard wide">
-      <div class="pnum">01 · 2026</div>
+      <div class="pnum" data-i18n="proj1_num">01 · 2026</div>
       <div class="phead">
-        <div class="pname">Edge-Cloud Collaborative Intelligent Agent Router</div>
-        <span class="paward">🥇 Google DeepMind Hackathon — DC Region #1</span>
+        <div class="pname" data-i18n="proj1_name">Edge-Cloud Collaborative Intelligent Agent Router</div>
+        <span class="paward" data-i18n="proj1_award">🥇 Google DeepMind Hackathon — DC Region #1</span>
       </div>
       <div class="tags" style="margin:0">
         <span class="tag tl">Python</span>
@@ -971,20 +983,20 @@
         <span class="tag tc">Regex</span>
       </div>
       <ul class="bullets">
-        <li>Designed and implemented a multi-level dynamic routing system targeting the instruction-following bottleneck of an ultra-small 270M-parameter edge model. Built a fast-path interceptor using regex and heuristic logic to compress high-frequency simple instruction latency to microsecond-level, achieving extreme TTFT optimization.</li>
-        <li>Developed an intent-prediction algorithm that parses logical connectives and complex syntax in user inputs to dynamically adjust the switching threshold between local inference and the cloud Gemini API — maintaining <strong>100% task success rate</strong> with <strong>95%+ local processing</strong>.</li>
-        <li>Constructed a data-centric post-processing framework integrating automatic type correction, schema validation, and semantic noise filtering across 10+ heterogeneous tool calls. Leveraged the Cactus framework on Apple M4 to achieve a prefill speed of <strong>3,000 tokens/sec</strong>.</li>
+        <li data-i18n="proj1_b1">Designed and implemented a multi-level dynamic routing system targeting the instruction-following bottleneck of an ultra-small 270M-parameter edge model. Built a fast-path interceptor using regex and heuristic logic to compress high-frequency simple instruction latency to microsecond-level, achieving extreme TTFT optimization.</li>
+        <li data-i18n="proj1_b2">Developed an intent-prediction algorithm that parses logical connectives and complex syntax in user inputs to dynamically adjust the switching threshold between local inference and the cloud Gemini API — maintaining <strong>100% task success rate</strong> with <strong>95%+ local processing</strong>.</li>
+        <li data-i18n="proj1_b3">Constructed a data-centric post-processing framework integrating automatic type correction, schema validation, and semantic noise filtering across 10+ heterogeneous tool calls. Leveraged the Cactus framework on Apple M4 to achieve a prefill speed of <strong>3,000 tokens/sec</strong>.</li>
       </ul>
       <div class="plinks">
-        <a href="https://github.com/ByteYuan227/Functiongemma_Hackathon" target="_blank" rel="noopener noreferrer" class="plink">↗ GitHub</a>
-        <a href="#" class="plink">↗ Demo</a>
+        <a href="https://github.com/ByteYuan227/Functiongemma_Hackathon" target="_blank" rel="noopener noreferrer" class="plink" data-i18n="link_github">↗ GitHub</a>
+        <a href="#" class="plink" data-i18n="link_demo">↗ Demo</a>
       </div>
     </div>
 
     <!-- RAG QA -->
     <div class="pcard">
-      <div class="pnum">02 · 2025</div>
-      <div class="pname">Local LLM + RAG Intelligent QA Agent</div>
+      <div class="pnum" data-i18n="proj2_num">02 · 2025</div>
+      <div class="pname" data-i18n="proj2_name">Local LLM + RAG Intelligent QA Agent</div>
       <div class="tags" style="margin:0">
         <span class="tag tl">Python</span>
         <span class="tag ts">HuggingFace</span>
@@ -993,19 +1005,19 @@
         <span class="tag to">TF-IDF · BERT</span>
       </div>
       <ul class="bullets">
-        <li>Designed a RAG system combining TF-IDF sparse retrieval with locally-deployed Gemma 3 via Ollama, achieving <strong>76% recall</strong> on complex trivia knowledge datasets.</li>
-        <li>Fine-tuned DistilBERT using LoRA (rank=32) to build a dynamic Buzzer classifier for optimal early-truncation decisions, reducing redundant inference time.</li>
-        <li>Optimized confidence threshold (0.15–0.80) via binary search, locking Expected Wins at <strong>0.1703</strong>.</li>
+        <li data-i18n="proj2_b1">Designed a RAG system combining TF-IDF sparse retrieval with locally-deployed Gemma 3 via Ollama, achieving <strong>76% recall</strong> on complex trivia knowledge datasets.</li>
+        <li data-i18n="proj2_b2">Fine-tuned DistilBERT using LoRA (rank=32) to build a dynamic Buzzer classifier for optimal early-truncation decisions, reducing redundant inference time.</li>
+        <li data-i18n="proj2_b3">Optimized confidence threshold (0.15–0.80) via binary search, locking Expected Wins at <strong>0.1703</strong>.</li>
       </ul>
       <div class="plinks">
-        <a href="https://github.com/ByteYuan227/QA-System-" target="_blank" rel="noopener noreferrer" class="plink">↗ GitHub</a>
+        <a href="https://github.com/ByteYuan227/QA-System-" target="_blank" rel="noopener noreferrer" class="plink" data-i18n="link_github">↗ GitHub</a>
       </div>
     </div>
 
     <!-- NLP Educational Chatbot -->
     <div class="pcard">
-      <div class="pnum">03 · 2025</div>
-      <div class="pname">NLP Educational Chatbot</div>
+      <div class="pnum" data-i18n="proj3_num">03 · 2025</div>
+      <div class="pname" data-i18n="proj3_name">NLP Educational Chatbot</div>
       <div class="tags" style="margin:0">
         <span class="tag tl">Python</span>
         <span class="tag ts">RAG</span>
@@ -1015,22 +1027,22 @@
         <span class="tag tl">Transformer</span>
       </div>
       <ul class="bullets">
-        <li>Built a domain-specific chatbot to answer NLP course concepts, serving as an interactive teaching assistant.</li>
-        <li>Designed and implemented a RAG pipeline with chunking, embeddings, and FAISS retrieval for evidence-based responses.</li>
-        <li>Fine-tuned and applied Transformer models to deliver context-aware explanations of definitions, algorithms, and formulas.</li>
-        <li>Developed a FastAPI backend with Streamlit interface, supporting real-time queries and multi-turn conversations.</li>
-        <li>Evaluated quality using Recall@k, F1-score, and human ratings, achieving an average answer score of <strong>4.5/5</strong>.</li>
-        <li>Deployed a demo capable of handling <strong>100+ NLP-related queries</strong>, demonstrating reliable accuracy and usability.</li>
+        <li data-i18n="proj3_b1">Built a domain-specific chatbot to answer NLP course concepts, serving as an interactive teaching assistant.</li>
+        <li data-i18n="proj3_b2">Designed and implemented a RAG pipeline with chunking, embeddings, and FAISS retrieval for evidence-based responses.</li>
+        <li data-i18n="proj3_b3">Fine-tuned and applied Transformer models to deliver context-aware explanations of definitions, algorithms, and formulas.</li>
+        <li data-i18n="proj3_b4">Developed a FastAPI backend with Streamlit interface, supporting real-time queries and multi-turn conversations.</li>
+        <li data-i18n="proj3_b5">Evaluated quality using Recall@k, F1-score, and human ratings, achieving an average answer score of <strong>4.5/5</strong>.</li>
+        <li data-i18n="proj3_b6">Deployed a demo capable of handling <strong>100+ NLP-related queries</strong>, demonstrating reliable accuracy and usability.</li>
       </ul>
       <div class="plinks">
-        <a href="https://github.com/ByteYuan227?tab=repositories" target="_blank" rel="noopener noreferrer" class="plink">↗ GitHub</a>
+        <a href="https://github.com/ByteYuan227?tab=repositories" target="_blank" rel="noopener noreferrer" class="plink" data-i18n="link_github">↗ GitHub</a>
       </div>
     </div>
 
     <!-- Record Management System -->
     <div class="pcard">
-      <div class="pnum">04 · 2024</div>
-      <div class="pname">Record Management System</div>
+      <div class="pnum" data-i18n="proj4_num">04 · 2024</div>
+      <div class="pname" data-i18n="proj4_name">Record Management System</div>
       <div class="tags" style="margin:0">
         <span class="tag tl">Node.js</span>
         <span class="tag ts">React</span>
@@ -1040,15 +1052,15 @@
         <span class="tag tl">Docker</span>
       </div>
       <ul class="bullets">
-        <li>Developed full-stack application with Node.js/Express backend and React/Redux frontend for asset management.</li>
-        <li>Implemented comprehensive JWT authentication and role-based access control with <strong>2s</strong> initial load time.</li>
-        <li>Built RESTful and GraphQL APIs with modular architecture supporting complex search operations.</li>
-        <li>Integrated AWS S3 for secure content delivery and version control with media processing workflows.</li>
-        <li>Containerized application components with Docker, orchestrating deployment on AWS ECS with blue-green strategy.</li>
-        <li>Implemented automated scaling policies and infrastructure monitoring, reducing operational incidents by <strong>76%</strong>.</li>
+        <li data-i18n="proj4_b1">Developed full-stack application with Node.js/Express backend and React/Redux frontend for asset management.</li>
+        <li data-i18n="proj4_b2">Implemented comprehensive JWT authentication and role-based access control with <strong>2s</strong> initial load time.</li>
+        <li data-i18n="proj4_b3">Built RESTful and GraphQL APIs with modular architecture supporting complex search operations.</li>
+        <li data-i18n="proj4_b4">Integrated AWS S3 for secure content delivery and version control with media processing workflows.</li>
+        <li data-i18n="proj4_b5">Containerized application components with Docker, orchestrating deployment on AWS ECS with blue-green strategy.</li>
+        <li data-i18n="proj4_b6">Implemented automated scaling policies and infrastructure monitoring, reducing operational incidents by <strong>76%</strong>.</li>
       </ul>
       <div class="plinks">
-        <a href="https://github.com/ByteYuan227?tab=repositories" target="_blank" rel="noopener noreferrer" class="plink">↗ GitHub</a>
+        <a href="https://github.com/ByteYuan227?tab=repositories" target="_blank" rel="noopener noreferrer" class="plink" data-i18n="link_github">↗ GitHub</a>
       </div>
     </div>
 
@@ -1059,11 +1071,11 @@
 <!-- SKILLS -->
 <div class="section-wrap reveal" id="skills">
 <section>
-  <div class="section-label">04 — Skills</div>
-  <h2>My <em>toolkit</em></h2>
+  <div class="section-label" data-i18n="skills_label">04 — Skills</div>
+  <h2 data-i18n-html="skills_h2">My <em>toolkit</em></h2>
   <div class="skills-grid">
     <div class="sk-cat">
-      <h3>Programming Languages & Data Processing</h3>
+      <h3 data-i18n="skills_cat1">Programming Languages & Data Processing</h3>
       <div class="pills">
         <span class="pill">Java</span>
         <span class="pill">Python</span>
@@ -1077,7 +1089,7 @@
         <span class="pill">Ruby</span>
       </div>
 
-      <h3>Deep Learning Frameworks</h3>
+      <h3 data-i18n="skills_cat2">Deep Learning Frameworks</h3>
       <div class="pills">
         <span class="pill">PyTorch</span>
         <span class="pill">Hugging Face (Transformers, Datasets, PEFT)</span>
@@ -1085,7 +1097,7 @@
         <span class="pill">vLLM</span>
       </div>
 
-      <h3>Algorithms & Model Alignment</h3>
+      <h3 data-i18n="skills_cat3">Algorithms & Model Alignment</h3>
       <div class="pills">
         <span class="pill">LoRA</span>
         <span class="pill">RAG</span>
@@ -1099,7 +1111,7 @@
     </div>
 
     <div class="sk-cat">
-      <h3>Agent & Workflow</h3>
+      <h3 data-i18n="skills_cat4">Agent & Workflow</h3>
       <div class="pills">
         <span class="pill">LangChain</span>
         <span class="pill">LangGraph</span>
@@ -1108,7 +1120,7 @@
         <span class="pill">Plan-and-Execute</span>
       </div>
 
-      <h3>Deployment & Dev Tools</h3>
+      <h3 data-i18n="skills_cat5">Deployment & Dev Tools</h3>
       <div class="pills">
         <span class="pill">Linux / Unix</span>
         <span class="pill">Git</span>
@@ -1125,14 +1137,14 @@
 <!-- EDUCATION -->
 <div class="section-wrap reveal" id="education">
 <section>
-  <div class="section-label">05 — Education</div>
-  <h2>Where I <em>studied</em></h2>
+  <div class="section-label" data-i18n="edu_label">05 — Education</div>
+  <h2 data-i18n-html="edu_h2">Where I <em>studied</em></h2>
   <div class="edu-card">
     <div class="edu-icon">🎓</div>
-    <div class="edu-degree">B.Sc. Computer Science · Minor in Business Administration</div>
-    <div class="edu-school">UNIVERSITY OF MARYLAND, COLLEGE PARK</div>
-    <div class="edu-meta">Expected: December 2026 · College Park, MD</div>
-    <div class="edu-detail">
+    <div class="edu-degree" data-i18n="edu_degree">B.Sc. Computer Science · Minor in Business Administration</div>
+    <div class="edu-school" data-i18n="edu_school">UNIVERSITY OF MARYLAND, COLLEGE PARK</div>
+    <div class="edu-meta" data-i18n="edu_meta">Expected: December 2026 · College Park, MD</div>
+    <div class="edu-detail" data-i18n-html="edu_detail">
       <span class="hl">2024 OMSE Academic Excellence Award</span> &nbsp;·&nbsp; <span class="hl">2024–2025 Dean's List</span>
       <br><br>
       Graduate-level coursework in Multimodal Deep Learning and QA Systems, alongside core CS curriculum spanning AI, ML, Computer Vision, Distributed Systems, and Operating Systems.
@@ -1144,22 +1156,22 @@
 <!-- CONTACT -->
 <div class="section-wrap reveal" id="contact">
   <div class="contact-center">
-    <div class="section-label">06 — Contact</div>
-    <h2 style="font-size: clamp(2rem, 5vw, 3.8rem); margin-bottom: 1.2rem;">Let's work<br><em>together</em></h2>
-    <p class="contact-blurb">Open to AI/ML research roles, software engineering internships, and new grad opportunities. Whether you have a project in mind or just want to connect — my inbox is always open.</p>
+    <div class="section-label" data-i18n="contact_label">06 — Contact</div>
+    <h2 style="font-size: clamp(2rem, 5vw, 3.8rem); margin-bottom: 1.2rem;" data-i18n-html="contact_h2">Let's work<br><em>together</em></h2>
+    <p class="contact-blurb" data-i18n="contact_blurb">Open to AI/ML research roles, software engineering internships, and new grad opportunities. Whether you have a project in mind or just want to connect — my inbox is always open.</p>
     <a href="mailto:vincentyuan227@gmail.com" class="contact-email">vincentyuan227@gmail.com</a>
     <div class="socials">
-      <a href="https://github.com/ByteYuan227" target="_blank" rel="noopener noreferrer" class="social-link">↗ GitHub</a>
+      <a href="https://github.com/ByteYuan227" target="_blank" rel="noopener noreferrer" class="social-link" data-i18n="link_github">↗ GitHub</a>
       <a href="https://www.linkedin.com/in/mu-yuan227/" target="_blank" rel="noopener noreferrer" class="social-link">↗ LinkedIn</a>
-      <a href="mailto:vincentyuan227@gmail.com" class="social-link">↗ Email</a>
-      <a href="tel:2409303436" class="social-link">↗ (240) 930-3436</a>
+      <a href="mailto:vincentyuan227@gmail.com" class="social-link" data-i18n="contact_email">↗ Email</a>
+      <a href="tel:2409303436" class="social-link" data-i18n="contact_phone">↗ (240) 930-3436</a>
     </div>
   </div>
 </div>
 
 <footer>
-  <p>© 2026 Mu Yuan</p>
-  <p>CS @ University of Maryland, College Park</p>
+  <p data-i18n="footer1">© 2026 Mu Yuan</p>
+  <p data-i18n="footer2">CS @ University of Maryland, College Park</p>
 </footer>
 
 <script>
@@ -1179,8 +1191,188 @@
         else document.documentElement.removeAttribute('data-theme');
         btn.textContent = next === 'light' ? 'Dark' : 'Light';
         localStorage.setItem('theme', next);
+        if (window.applyLang) window.applyLang(localStorage.getItem('lang') || 'en');
       });
     }
+  })();
+
+  // Language toggle (i18n)
+  (function() {
+    var I18N = {
+      en: {
+        lang_btn: "中文",
+        theme_btn: "Light", theme_btn_alt: "Dark",
+        nav_about: "About", nav_exp: "Experience", nav_projects: "Projects", nav_skills: "Skills", nav_edu: "Education", nav_contact: "Contact",
+        hero_tag: "AI / ML · Backend Engineer · UMD CS '26",
+        hero_sub: "Software engineer specializing in large language models, RAG systems, and edge-cloud AI agent architecture. I build systems that are fast, intelligent, and production-ready.",
+        btn_contact: "Get in touch", btn_work: "View my work",
+        about_label: "01 — About", about_h2: "A little about <em>me</em>",
+        about_p1: "Hi, I'm Mu Yuan — a Computer Science student at the University of Maryland, College Park with a minor in Business Administration, graduating December 2026.",
+        about_p2: "My work sits at the intersection of systems engineering and AI: I build efficient LLM inference pipelines, retrieval-augmented generation systems, and edge-cloud agent architectures that are fast and reliable in production.",
+        about_p3: "Recognized with the 2024 OMSE Academic Excellence Award and named to the 2024–2025 Dean's List.",
+        about_courses: "Relevant Coursework",
+        stat1: "Google DeepMind Hackathon — DC Region #1 (objective score)",
+        stat2: "Local task processing on edge-cloud agent system",
+        stat3: "Recall on RAG-based QA agent",
+        stat4: "Accuracy boost on thermal imaging classifier",
+        exp_label: "02 — Experience", exp_h2: "Where I've <em>worked</em>",
+        job1_period: "Jun 2025 — Aug 2025\nRemote", job1_company: "BYTEDANCE", job1_title: "Software Engineering Intern — Backend",
+        job1_b1: "Designed and developed scalable RESTful APIs for a high-traffic distributed order management system using Java and Spring Boot, reliably supporting high concurrent requests during peak transactional periods.",
+        job1_b2: "Optimized database performance by analyzing slow SQL execution plans and implementing a distributed Redis caching layer, reducing average API read latency by 40% and significantly lowering primary database load.",
+        job1_b3: "Engineered asynchronous data pipelines using Apache Kafka to decouple non-core business logic (notification dispatch, logging) from the main transaction flow, enhancing system fault tolerance and response times.",
+        job1_b4: "Authored comprehensive test suites with JUnit and Mockito, achieving 85%+ code coverage and ensuring seamless integration with the automated CI/CD deployment pipeline.",
+        job1_b5: "Participated in production troubleshooting via system monitoring and log analysis, gaining hands-on experience with JVM memory tuning and thread pool optimization to resolve intermittent performance bottlenecks.",
+        job2_period: "May 2024 — Aug 2024\nShenzhen, CN", job2_company: "EVERSTAY TECH", job2_title: "Machine Learning Intern",
+        job2_b1: "Built a multimodal LLM reranker with PyTorch and JAX, improving relevance on production benchmarks and evaluation.",
+        job2_b2: "Applied image and video tokenization to compress inputs, boosting throughput and reducing GPU memory usage.",
+        job2_b3: "Implemented instruction-tuning and DPO/IPO pipelines, increasing helpfulness and factuality under evaluation metrics.",
+        job2_b4: "Optimized decoding with KV cache and speculative decoding, significantly reducing p95 latency under production workloads.",
+        job2_b5: "Designed experiments and statistical analyses, running A/B tests with confidence intervals and calibration metrics.",
+        job2_b6: "Integrated open-vocabulary understanding and safety guardrails, strengthening multimodal reliability in production systems.",
+        job2_b7: "Collaborated cross-functionally with product and infrastructure teams, delivering reproducible pipelines and evaluation suites.",
+        job3_period: "Sep 2022 — Jan 2023", job3_company: "AERODYNAMICS LABORATORY", job3_title: "Research Assistant",
+        job3_b1: "Independently developed a Python-based standardized data preprocessing pipeline for cleaning and annotating 5,000+ infrared images; introduced domain-specific data augmentation that tripled the training dataset, substantially improving model generalization.",
+        job3_b2: "Built a reproducible ML training workflow with automated performance evaluation tooling (confusion matrix + mAP metrics), driving a 15% accuracy improvement on a thermal imaging classification model and significantly shortening algorithm iteration cycles.",
+        proj_label: "03 — Projects", proj_h2: "Things I've <em>built</em>",
+        proj1_num: "01 · 2026", proj1_name: "Edge-Cloud Collaborative Intelligent Agent Router", proj1_award: "Google DeepMind Hackathon — DC Region #1",
+        proj1_b1: "Designed and implemented a multi-level dynamic routing system targeting the instruction-following bottleneck of an ultra-small 270M-parameter edge model. Built a fast-path interceptor using regex and heuristic logic to compress high-frequency simple instruction latency to microsecond-level, achieving extreme TTFT optimization.",
+        proj1_b2: "Developed an intent-prediction algorithm that parses logical connectives and complex syntax in user inputs to dynamically adjust the switching threshold between local inference and the cloud Gemini API — maintaining 100% task success rate with 95%+ local processing.",
+        proj1_b3: "Constructed a data-centric post-processing framework integrating automatic type correction, schema validation, and semantic noise filtering across 10+ heterogeneous tool calls. Leveraged the Cactus framework on Apple M4 to achieve a prefill speed of 3,000 tokens/sec.",
+        proj2_num: "02 · 2025", proj2_name: "Local LLM + RAG Intelligent QA Agent",
+        proj2_b1: "Designed a RAG system combining TF-IDF sparse retrieval with locally-deployed Gemma 3 via Ollama, achieving 76% recall on complex trivia knowledge datasets.",
+        proj2_b2: "Fine-tuned DistilBERT using LoRA (rank=32) to build a dynamic Buzzer classifier for optimal early-truncation decisions, reducing redundant inference time.",
+        proj2_b3: "Optimized confidence threshold (0.15–0.80) via binary search, locking Expected Wins at 0.1703.",
+        proj3_num: "03 · 2025", proj3_name: "NLP Educational Chatbot",
+        proj3_b1: "Built a domain-specific chatbot to answer NLP course concepts, serving as an interactive teaching assistant.",
+        proj3_b2: "Designed and implemented a RAG pipeline with chunking, embeddings, and FAISS retrieval for evidence-based responses.",
+        proj3_b3: "Fine-tuned and applied Transformer models to deliver context-aware explanations of definitions, algorithms, and formulas.",
+        proj3_b4: "Developed a FastAPI backend with Streamlit interface, supporting real-time queries and multi-turn conversations.",
+        proj3_b5: "Evaluated quality using Recall@k, F1-score, and human ratings, achieving an average answer score of 4.5/5.",
+        proj3_b6: "Deployed a demo capable of handling 100+ NLP-related queries, demonstrating reliable accuracy and usability.",
+        proj4_num: "04 · 2024", proj4_name: "Record Management System",
+        proj4_b1: "Developed full-stack application with Node.js/Express backend and React/Redux frontend for asset management.",
+        proj4_b2: "Implemented comprehensive JWT authentication and role-based access control with 2s initial load time.",
+        proj4_b3: "Built RESTful and GraphQL APIs with modular architecture supporting complex search operations.",
+        proj4_b4: "Integrated AWS S3 for secure content delivery and version control with media processing workflows.",
+        proj4_b5: "Containerized application components with Docker, orchestrating deployment on AWS ECS with blue-green strategy.",
+        proj4_b6: "Implemented automated scaling policies and infrastructure monitoring, reducing operational incidents by 76%.",
+        link_github: "↗ GitHub", link_demo: "↗ Demo",
+        skills_label: "04 — Skills", skills_h2: "My <em>toolkit</em>",
+        skills_cat1: "Programming Languages & Data Processing",
+        skills_cat2: "Deep Learning Frameworks",
+        skills_cat3: "Algorithms & Model Alignment",
+        skills_cat4: "Agent & Workflow",
+        skills_cat5: "Deployment & Dev Tools",
+        edu_label: "05 — Education", edu_h2: "Where I <em>studied</em>",
+        edu_degree: "B.Sc. Computer Science · Minor in Business Administration",
+        edu_school: "UNIVERSITY OF MARYLAND, COLLEGE PARK",
+        edu_meta: "Expected: December 2026 · College Park, MD",
+        edu_detail: "<span class=\"hl\">2024 OMSE Academic Excellence Award</span> · <span class=\"hl\">2024–2025 Dean's List</span><br><br>Graduate-level coursework in Multimodal Deep Learning and QA Systems, alongside core CS curriculum spanning AI, ML, Computer Vision, Distributed Systems, and Operating Systems.",
+        contact_label: "06 — Contact", contact_h2: "Let's work<br><em>together</em>",
+        contact_blurb: "Open to AI/ML research roles, software engineering internships, and new grad opportunities. Whether you have a project in mind or just want to connect — my inbox is always open.",
+        contact_email: "↗ Email", contact_phone: "↗ (240) 930-3436",
+        footer1: "© 2026 Mu Yuan",
+        footer2: "CS @ University of Maryland, College Park"
+      },
+      zh: {
+        lang_btn: "EN",
+        theme_btn: "浅色", theme_btn_alt: "深色",
+        nav_about: "关于", nav_exp: "经历", nav_projects: "项目", nav_skills: "技能", nav_edu: "教育", nav_contact: "联系",
+        hero_tag: "AI / ML · 后端工程师 · UMD CS '26",
+        hero_sub: "专注于大语言模型、RAG 系统与边云协同 AI 智能体架构的软件工程师，构建快速、智能且可用于生产环境的系统。",
+        btn_contact: "联系我", btn_work: "查看作品",
+        about_label: "01 — 关于", about_h2: "关于我",
+        about_p1: "你好，我是穆远，马里兰大学帕克分校计算机科学专业学生，辅修工商管理，预计 2026 年 12 月毕业。",
+        about_p2: "我的工作聚焦于系统与 AI 的交叉：构建高效的 LLM 推理管线、检索增强生成（RAG）系统以及边云智能体架构，追求在生产环境中快速、可靠。",
+        about_p3: "曾获 2024 OMSE 学术优秀奖，并入选 2024–2025 院长名单。",
+        about_courses: "相关课程",
+        stat1: "Google DeepMind Hackathon — DC 赛区 #1（客观分）",
+        stat2: "边云智能体系统本地任务处理占比",
+        stat3: "基于 RAG 的 QA 智能体 Recall",
+        stat4: "热成像分类模型准确率提升",
+        exp_label: "02 — 经历", exp_h2: "工作经历",
+        job1_period: "2025年6月 — 2025年8月\n远程", job1_company: "BYTEDANCE", job1_title: "软件工程实习 — 后端",
+        job1_b1: "设计并开发高并发分布式订单管理系统的可扩展 RESTful API，使用 Java 与 Spring Boot，在高峰时段稳定支持高并发请求。",
+        job1_b2: "通过分析慢 SQL 执行计划并引入分布式 Redis 缓存层优化数据库性能，API 读取延迟平均降低 40%，显著减轻主库负载。",
+        job1_b3: "使用 Apache Kafka 构建异步数据管道，将通知下发、日志等非核心逻辑与主事务流解耦，提升系统容错与响应速度。",
+        job1_b4: "使用 JUnit 与 Mockito 编写测试套件，代码覆盖率达 85%+，并与 CI/CD 部署流水线无缝集成。",
+        job1_b5: "参与生产问题排查与系统监控、日志分析，积累 JVM 内存调优与线程池优化经验，解决间歇性性能瓶颈。",
+        job2_period: "2024年5月 — 2024年8月\n深圳", job2_company: "EVERSTAY TECH", job2_title: "机器学习实习",
+        job2_b1: "使用 PyTorch 与 JAX 构建多模态 LLM 重排序模型，提升生产基准与评估中的相关性表现。",
+        job2_b2: "应用图像与视频 tokenization 压缩输入，提升吞吐并降低 GPU 显存占用。",
+        job2_b3: "实现 instruction-tuning 与 DPO/IPO 流程，在评估指标上提升有用性与事实性。",
+        job2_b4: "通过 KV cache 与 speculative decoding 优化解码，显著降低生产负载下的 p95 延迟。",
+        job2_b5: "设计实验与统计分析，开展带置信区间的 A/B 测试与校准指标评估。",
+        job2_b6: "集成开放词表理解与安全护栏，增强生产系统中多模态的可靠性。",
+        job2_b7: "与产品、基础设施团队跨职能协作，交付可复现的流水线与评估套件。",
+        job3_period: "2022年9月 — 2023年1月", job3_company: "AERODYNAMICS LABORATORY", job3_title: "研究助理",
+        job3_b1: "独立开发基于 Python 的标准化数据预处理流程，清洗与标注 5000+ 红外图像；引入领域数据增强使训练集扩大三倍，显著提升模型泛化。",
+        job3_b2: "构建可复现的 ML 训练流程与自动化评估工具（混淆矩阵与 mAP），推动热成像分类模型准确率提升 15%，并缩短算法迭代周期。",
+        proj_label: "03 — 项目", proj_h2: "我的项目",
+        proj1_num: "01 · 2026", proj1_name: "边云协同智能体路由系统", proj1_award: "Google DeepMind Hackathon — DC 赛区 #1",
+        proj1_b1: "设计并实现多级动态路由系统，针对 2.7 亿参数边缘模型的指令跟随瓶颈；使用正则与启发式逻辑构建快路径拦截器，将高频简单指令延迟压至微秒级，实现极致 TTFT 优化。",
+        proj1_b2: "开发意图预测算法，解析用户输入中的逻辑连接词与复杂句法，动态调整本地推理与云端 Gemini API 的切换阈值，保持 100% 任务成功率与 95%+ 本地处理占比。",
+        proj1_b3: "构建以数据为中心的后处理框架，集成自动类型校正、模式校验与语义噪声过滤，覆盖 10+ 异构工具调用；在 Apple M4 上借助 Cactus 框架实现 3,000 tokens/秒 的预填充分速度。",
+        proj2_num: "02 · 2025", proj2_name: "本地 LLM + RAG 智能问答系统",
+        proj2_b1: "设计 RAG 系统，结合 TF-IDF 稀疏检索与通过 Ollama 本地部署的 Gemma 3，在复杂知识问答数据上达到 76% recall。",
+        proj2_b2: "使用 LoRA (rank=32) 微调 DistilBERT 构建动态 Buzzer 分类器，用于最优提前截断决策，减少冗余推理时间。",
+        proj2_b3: "通过二分搜索优化置信度阈值 (0.15–0.80)，将 Expected Wins 锁定在 0.1703。",
+        proj3_num: "03 · 2025", proj3_name: "NLP 教育对话机器人",
+        proj3_b1: "构建面向 NLP 课程概念的领域对话机器人，作为互动教学助手。",
+        proj3_b2: "设计并实现 RAG 流程：分块、向量化与 FAISS 检索，提供有据可查的回复。",
+        proj3_b3: "微调并应用 Transformer 模型，对定义、算法与公式进行情境化解释。",
+        proj3_b4: "开发 FastAPI 后端与 Streamlit 界面，支持实时查询与多轮对话。",
+        proj3_b5: "使用 Recall@k、F1 与人工评分评估质量，平均回答得分 4.5/5。",
+        proj3_b6: "部署可处理 100+ NLP 相关查询的 demo，展示稳定准确性与可用性。",
+        proj4_num: "04 · 2024", proj4_name: "档案管理系统",
+        proj4_b1: "使用 Node.js/Express 后端与 React/Redux 前端开发资产管理全栈应用。",
+        proj4_b2: "实现 JWT 认证与基于角色的访问控制，首屏加载时间 2 秒。",
+        proj4_b3: "构建 RESTful 与 GraphQL API，模块化架构支持复杂检索。",
+        proj4_b4: "集成 AWS S3 实现安全内容分发与版本控制及媒体处理流程。",
+        proj4_b5: "使用 Docker 容器化应用组件，在 AWS ECS 上采用蓝绿策略编排部署。",
+        proj4_b6: "实现自动扩缩容与基础设施监控，运维事件减少 76%。",
+        link_github: "↗ GitHub", link_demo: "↗ Demo",
+        skills_label: "04 — 技能", skills_h2: "我的工具箱",
+        skills_cat1: "编程语言与数据处理",
+        skills_cat2: "深度学习框架",
+        skills_cat3: "算法与模型对齐",
+        skills_cat4: "Agent 与工作流",
+        skills_cat5: "部署与开发工具",
+        edu_label: "05 — 教育", edu_h2: "教育背景",
+        edu_degree: "计算机科学学士 · 辅修工商管理",
+        edu_school: "UNIVERSITY OF MARYLAND, COLLEGE PARK",
+        edu_meta: "预计毕业：2026年12月 · College Park, MD",
+        edu_detail: "<span class=\"hl\">2024 OMSE 学术优秀奖</span> · <span class=\"hl\">2024–2025 院长名单</span><br><br>研究生课程：Multimodal Deep Learning、QA Systems；核心 CS 课程涵盖 AI、ML、Computer Vision、Distributed Systems、Operating Systems。",
+        contact_label: "06 — 联系", contact_h2: "一起合作",
+        contact_blurb: "开放 AI/ML 研究、软件工程实习及应届岗位机会。无论你有项目想法或只想交流，欢迎来信。",
+        contact_email: "↗ 邮箱", contact_phone: "↗ (240) 930-3436",
+        footer1: "© 2026 穆远",
+        footer2: "CS @ University of Maryland, College Park"
+      }
+    };
+    function applyLang(lang) {
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var k = el.getAttribute('data-i18n');
+        if (I18N[lang] && I18N[lang][k] !== undefined) el.textContent = I18N[lang][k];
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+        var k = el.getAttribute('data-i18n-html');
+        if (I18N[lang] && I18N[lang][k] !== undefined) el.innerHTML = I18N[lang][k].replace(/\n/g, '<br>');
+      });
+      var lb = document.getElementById('langToggle');
+      if (lb) lb.textContent = I18N[lang].lang_btn;
+      var tb = document.getElementById('themeToggle');
+      if (tb) tb.textContent = document.documentElement.getAttribute('data-theme') === 'light' ? I18N[lang].theme_btn_alt : I18N[lang].theme_btn;
+      localStorage.setItem('lang', lang);
+    }
+    var lang = localStorage.getItem('lang') || 'en';
+    applyLang(lang);
+    document.getElementById('langToggle').addEventListener('click', function() {
+      var next = document.documentElement.lang === 'zh-CN' ? 'en' : 'zh';
+      applyLang(next);
+    });
+    window.applyLang = applyLang;
   })();
 
   // Mobile nav hamburger
