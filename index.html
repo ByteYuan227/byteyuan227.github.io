@@ -143,6 +143,8 @@
     font-size: 1.1rem;
     color: var(--lime);
   }
+  .nav-end { display: flex; align-items: center; gap: 2rem; }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
   .nav-links { display: flex; gap: 2rem; }
   .nav-links a {
     font-family: 'DM Mono', monospace;
@@ -688,6 +690,7 @@
   }
 
   @media (max-width: 768px) {
+    .nav-end { gap: 1rem; }
     .nav-hamburger { display: flex; }
     .nav-links {
       position: fixed;
@@ -715,21 +718,15 @@
       visibility: visible;
       pointer-events: auto;
     }
-    .nav-links a,
-    .nav-links .theme-toggle {
+    .nav-links a {
       padding: 0.9rem 0;
       border-bottom: 1px solid var(--border);
       width: 100%;
       text-align: left;
       font-size: 0.85rem;
     }
-    .nav-links .theme-toggle {
-      margin-top: 0.5rem;
-      border: 1px solid var(--border);
-      text-align: center;
-      border-bottom: none;
-    }
-    .nav-links a:last-of-type { border-bottom: none; }
+    .nav-links a:last-child { border-bottom: none; }
+    .nav-right .theme-toggle { font-size: 0.68rem; padding: 0.35rem 0.65rem; }
   }
 </style>
 </head>
@@ -741,17 +738,21 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">MY.</div>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="nav-links" id="navLinks">
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">Light</button>
+  <div class="nav-end">
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">Light</button>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </nav>
 
