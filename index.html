@@ -141,15 +141,63 @@
     display: flex; align-items: center; justify-content: center;
     position: relative;
   }
-  .hero-art { width: 380px; height: 380px; position: relative; }
+  .hero-art { width: 380px; height: 380px; position: relative; overflow: visible; }
   .blob {
-    position: absolute; border-radius: 50%;
+    position: absolute;
+    border-radius: 50%;
     filter: blur(60px);
-    animation: pulse 6s ease-in-out infinite;
+    will-change: transform;
   }
-  .blob-1 { width: 280px; height: 280px; background: var(--violet); opacity: 0.35; top: 0; left: 0; }
-  .blob-2 { width: 200px; height: 200px; background: var(--sky); opacity: 0.3; bottom: 0; right: 0; animation-delay: 2s; }
-  .blob-3 { width: 160px; height: 160px; background: var(--lime); opacity: 0.22; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 4s; }
+  .blob-1 {
+    width: 280px; height: 280px;
+    background: var(--violet);
+    opacity: 0.35;
+    top: 0; left: 0;
+    animation: blob-float-1 8s ease-in-out infinite;
+  }
+  .blob-2 {
+    width: 200px; height: 200px;
+    background: var(--sky);
+    opacity: 0.3;
+    bottom: 0; right: 0;
+    animation: blob-float-2 10s ease-in-out infinite 1.5s;
+  }
+  .blob-3 {
+    width: 160px; height: 160px;
+    background: var(--lime);
+    opacity: 0.22;
+    top: 50%; left: 50%;
+    animation: blob-float-3 7s ease-in-out infinite 0.5s;
+  }
+
+  @keyframes blob-float-1 {
+    0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    25% { transform: translate(20px, -30px) scale(1.08) rotate(5deg); }
+    50% { transform: translate(-15px, 25px) scale(1.15) rotate(-3deg); }
+    75% { transform: translate(25px, 15px) scale(1.06) rotate(4deg); }
+  }
+  @keyframes blob-float-2 {
+    0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate(-35px, -25px) scale(1.12) rotate(-6deg); }
+    66% { transform: translate(-15px, -40px) scale(1.05) rotate(3deg); }
+  }
+  @keyframes blob-float-3 {
+    0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    25% { transform: translate(calc(-50% - 20px), calc(-50% - 25px)) scale(1.18) rotate(8deg); }
+    50% { transform: translate(calc(-50% + 15px), calc(-50% + 20px)) scale(0.95) rotate(-5deg); }
+    75% { transform: translate(calc(-50% - 10px), calc(-50% + 15px)) scale(1.1) rotate(4deg); }
+  }
+  .blob-4 {
+    width: 120px; height: 120px;
+    background: var(--coral);
+    opacity: 0.18;
+    top: 30%; right: 20%;
+    animation: blob-float-4 12s ease-in-out infinite 2s;
+  }
+  @keyframes blob-float-4 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, 35px) scale(1.25); }
+  }
   .code-card {
     position: absolute;
     background: var(--surface);
@@ -519,6 +567,7 @@
       <div class="blob blob-1"></div>
       <div class="blob blob-2"></div>
       <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
       <div class="code-card cc1">
         <div><span class="kw">model</span> = <span class="str">Gemma(270M)</span></div>
         <div><span class="fn">ttft</span> → <span class="num">μs</span> latency</div>
