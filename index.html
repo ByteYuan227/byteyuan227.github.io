@@ -28,7 +28,23 @@
     font-family: 'Fraunces', serif;
     font-weight: 300;
     overflow-x: hidden;
+    position: relative;
   }
+
+  /* Mouse-following glow */
+  .mouse-glow {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,241,53,0.12) 0%, rgba(92,225,255,0.06) 25%, rgba(168,85,247,0.04) 50%, transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s;
+  }
+  @media (hover: none) { .mouse-glow { display: none; } }
 
   /* NAV */
   nav {
@@ -146,7 +162,11 @@
     z-index: 3;
     min-width: 200px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    transition: transform 0.2s ease-out;
+    transform-style: preserve-3d;
+    transform: perspective(600px);
   }
+  .code-card { will-change: transform; }
   .cc1 { top: 20px; right: -20px; }
   .cc2 { bottom: 40px; left: -40px; }
   .kw { color: var(--violet); }
@@ -234,9 +254,12 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 1.6rem;
-    transition: border-color 0.2s, transform 0.2s;
+    transition: border-color 0.3s, transform 0.2s ease-out;
+    transform-style: preserve-3d;
+    transform: perspective(800px);
   }
-  .stat-card:hover { border-color: var(--lime); transform: translateY(-4px); }
+  .stat-card:hover { border-color: var(--lime); }
+  .stat-card { will-change: transform; }
   .stat-num {
     font-family: 'Syne', sans-serif;
     font-size: 1.8rem;
@@ -310,8 +333,10 @@
     border-radius: 10px;
     padding: 1.8rem;
     display: flex; flex-direction: column; gap: 0.8rem;
-    transition: transform 0.2s, border-color 0.2s;
+    transition: transform 0.2s ease-out, border-color 0.3s;
     position: relative; overflow: hidden;
+    transform-style: preserve-3d;
+    transform: perspective(800px);
   }
   .pcard::before {
     content: '';
@@ -320,8 +345,9 @@
     transform: scaleX(0); transform-origin: left;
     transition: transform 0.3s;
   }
-  .pcard:hover { transform: translateY(-5px); border-color: rgba(200,241,53,0.3); }
+  .pcard:hover { border-color: rgba(200,241,53,0.3); }
   .pcard:hover::before { transform: scaleX(1); }
+  .pcard { will-change: transform; }
   .pcard.wide { grid-column: 1 / -1; }
   .pnum { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--muted); letter-spacing: 0.1em; }
   .phead { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
@@ -376,9 +402,12 @@
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 0 1.5rem;
-    transition: border-color 0.2s, transform 0.2s;
+    transition: border-color 0.3s, transform 0.2s ease-out;
+    transform-style: preserve-3d;
+    transform: perspective(800px);
   }
-  .edu-card:hover { border-color: var(--violet); transform: translateY(-3px); }
+  .edu-card:hover { border-color: var(--violet); }
+  .edu-card { will-change: transform; }
   .edu-icon { font-size: 2rem; grid-row: 1 / 5; padding-top: 0.2rem; }
   .edu-degree { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
   .edu-school { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--violet); letter-spacing: 0.05em; margin-bottom: 0.3rem; }
@@ -454,6 +483,7 @@
 </style>
 </head>
 <body>
+<div class="mouse-glow" id="mouseGlow" aria-hidden="true"></div>
 
 <!-- NAV -->
 <nav>
@@ -816,6 +846,42 @@
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
   reveals.forEach(el => observer.observe(el));
+
+  // Mouse-following glow
+  const glow = document.getElementById('mouseGlow');
+  let glowX = 0, glowY = 0;
+  let targetX = 0, targetY = 0;
+  if (glow) {
+    document.addEventListener('mousemove', (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    });
+    function animateGlow() {
+      glowX += (targetX - glowX) * 0.08;
+      glowY += (targetY - glowY) * 0.08;
+      glow.style.left = glowX + 'px';
+      glow.style.top = glowY + 'px';
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+  }
+
+  // 3D tilt cards
+  const tiltCards = document.querySelectorAll('.stat-card, .pcard, .edu-card, .code-card');
+  const tiltAmount = 12;
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const rotX = (y - 0.5) * -tiltAmount;
+      const rotY = (x - 0.5) * tiltAmount;
+      card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(10px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateZ(0)';
+    });
+  });
 </script>
 </body>
 </html>
