@@ -17,7 +17,46 @@
     --border: #2a2a2a;
     --text: #F0EDE8;
     --muted: #888;
+    --text-soft: #aaa;
+    --text-softer: #bbb;
+    --nav-bg: rgba(13,13,13,0.85);
+    --grid-line: rgba(42,42,42,0.03);
   }
+  [data-theme="light"] {
+    --bg: #F5F5F0;
+    --surface: #FFFFFF;
+    --border: #e0e0dc;
+    --text: #1a1a18;
+    --muted: #6b6b65;
+    --text-soft: #5c5c56;
+    --text-softer: #4a4a45;
+    --nav-bg: rgba(245,245,240,0.9);
+    --grid-line: rgba(0,0,0,0.04);
+  }
+  [data-theme="light"] .mouse-glow {
+    background: radial-gradient(circle, rgba(200,241,53,0.2) 0%, rgba(92,225,255,0.1) 25%, rgba(168,85,247,0.06) 50%, transparent 70%);
+  }
+  [data-theme="light"] .name-outline {
+    -webkit-text-stroke: 2px #9fc52a;
+  }
+  [data-theme="light"] .custom-cursor { border-color: #9fc52a; }
+  [data-theme="light"] .cursor-dot { background: #9fc52a; }
+  [data-theme="light"] .code-card { box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+
+  /* Theme toggle */
+  .theme-toggle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .theme-toggle:hover { color: var(--lime); border-color: var(--lime); }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -25,8 +64,8 @@
   body {
     background: var(--bg);
     background-image:
-      linear-gradient(rgba(42,42,42,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(42,42,42,0.03) 1px, transparent 1px);
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 60px 60px;
     color: var(--text);
     font-family: 'Fraunces', serif;
@@ -34,6 +73,7 @@
     overflow-x: hidden;
     position: relative;
     cursor: none;
+    transition: background 0.4s ease, color 0.4s ease;
   }
   @media (hover: none) { body { cursor: auto; } }
   a, button, .btn, .nav-links a, .plink, .social-link, .contact-email { cursor: none; }
@@ -94,7 +134,8 @@
     padding: 1.2rem 3rem;
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    background: rgba(13,13,13,0.85);
+    background: var(--nav-bg);
+    transition: background 0.4s ease, border-color 0.4s ease;
   }
   .nav-logo {
     font-family: 'Syne', sans-serif;
@@ -155,7 +196,7 @@
   .hero-sub {
     font-size: 1.05rem;
     line-height: 1.75;
-    color: #aaa;
+    color: var(--text-soft);
     max-width: 440px;
     margin-bottom: 2.5rem;
   }
@@ -306,6 +347,7 @@
   /* SECTIONS */
   .section-wrap {
     border-top: 1px solid var(--border);
+    transition: border-color 0.4s ease;
   }
   section {
     padding: 6rem 3rem;
@@ -348,7 +390,7 @@
   .about-text p {
     font-size: 1rem;
     line-height: 1.85;
-    color: #bbb;
+    color: var(--text-softer);
     margin-bottom: 1.1rem;
   }
   .contact-info {
@@ -376,7 +418,7 @@
     padding: 0.25rem 0.6rem;
     border-radius: 100px;
     border: 1px solid var(--border);
-    color: #aaa;
+    color: var(--text-soft);
   }
   .cpill.grad { border-color: rgba(168,85,247,0.45); color: var(--violet); }
 
@@ -442,7 +484,7 @@
   .bullets li {
     font-size: 0.9rem;
     line-height: 1.75;
-    color: #999;
+    color: var(--muted);
     padding-left: 1.2rem;
     position: relative;
   }
@@ -525,7 +567,7 @@
   .pill {
     font-family: 'DM Mono', monospace; font-size: 0.66rem;
     padding: 0.35rem 0.75rem; border: 1px solid var(--border);
-    border-radius: 100px; color: #ccc; transition: all 0.2s;
+    border-radius: 100px; color: var(--text-soft); transition: all 0.2s;
   }
   .pill:hover { border-color: var(--lime); color: var(--lime); }
 
@@ -548,7 +590,7 @@
   .edu-degree { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
   .edu-school { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--violet); letter-spacing: 0.05em; margin-bottom: 0.3rem; }
   .edu-meta { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); margin-bottom: 0.8rem; }
-  .edu-detail { font-size: 0.88rem; color: #888; line-height: 1.7; }
+  .edu-detail { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
   .hl { color: var(--lime); font-weight: 600; }
 
   /* CONTACT */
@@ -558,7 +600,7 @@
   }
   .contact-center .section-label { justify-content: center; }
   .contact-center .section-label::after { display: none; }
-  .contact-blurb { color: #888; font-size: 0.98rem; line-height: 1.8; margin-bottom: 2.5rem; }
+  .contact-blurb { color: var(--muted); font-size: 0.98rem; line-height: 1.8; margin-bottom: 2.5rem; }
   .contact-email {
     font-family: 'Syne', sans-serif;
     font-size: clamp(1.1rem, 2.5vw, 1.7rem);
@@ -633,6 +675,7 @@
     <a href="#skills">Skills</a>
     <a href="#education">Education</a>
     <a href="#contact">Contact</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">Light</button>
   </div>
 </nav>
 
@@ -861,7 +904,7 @@
         <li>Optimized confidence threshold (0.15–0.80) via binary search, locking Expected Wins at <strong>0.1703</strong>.</li>
       </ul>
       <div class="plinks">
-        <a href="https://github.com/ByteYuan227?tab=repositories" target="_blank" rel="noopener noreferrer" class="plink">↗ GitHub</a>
+        <a href="https://github.com/ByteYuan227/QA-System-" target="_blank" rel="noopener noreferrer" class="plink">↗ GitHub</a>
       </div>
     </div>
 
@@ -975,6 +1018,26 @@
 </footer>
 
 <script>
+  // Theme toggle
+  (function() {
+    const stored = localStorage.getItem('theme');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const theme = stored || (prefersLight ? 'light' : 'dark');
+    if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    const btn = document.getElementById('themeToggle');
+    if (btn) {
+      btn.textContent = theme === 'light' ? 'Dark' : 'Light';
+      btn.addEventListener('click', () => {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const next = isLight ? 'dark' : 'light';
+        if (next === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        else document.documentElement.removeAttribute('data-theme');
+        btn.textContent = next === 'light' ? 'Dark' : 'Light';
+        localStorage.setItem('theme', next);
+      });
+    }
+  })();
+
   // Scroll reveal animation
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
