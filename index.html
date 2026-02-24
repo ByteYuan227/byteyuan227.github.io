@@ -121,6 +121,28 @@
     .loader-spinner { animation: none; border-top-color: var(--lime); }
   }
 
+  /* Skip to main content (accessibility) */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 10002;
+    padding: 0.6rem 1.2rem;
+    background: var(--lime);
+    color: #0D0D0D;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+    transition: left 0.2s;
+  }
+  .skip-link:focus {
+    left: 0;
+    outline: 2px solid var(--lime);
+    outline-offset: 2px;
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
@@ -819,6 +841,7 @@
 <div class="mouse-glow" id="mouseGlow" aria-hidden="true"></div>
 <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<a href="#main" class="skip-link" data-i18n="skip_link">Skip to main content</a>
 
 <!-- NAV -->
 <nav aria-label="Main navigation">
@@ -844,6 +867,7 @@
 
 <!-- HERO -->
 <div id="hero">
+  <span id="main" tabindex="-1"></span>
   <div class="hero-left">
     <div class="hero-tag" data-i18n="hero_tag">AI / ML · Backend Engineer · UMD CS '26</div>
     <h1>
@@ -1260,6 +1284,7 @@
       en: {
         lang_btn: "中文",
         theme_btn: "Light", theme_btn_alt: "Dark",
+        skip_link: "Skip to main content",
         nav_about: "About", nav_exp: "Experience", nav_projects: "Projects", nav_skills: "Skills", nav_edu: "Education", nav_contact: "Contact",
         hero_tag: "AI / ML · Backend Engineer · UMD CS '26",
         hero_sub: "Software engineer specializing in large language models, RAG systems, and edge-cloud AI agent architecture. I build systems that are fast, intelligent, and production-ready.",
@@ -1337,6 +1362,7 @@
       zh: {
         lang_btn: "EN",
         theme_btn: "浅色", theme_btn_alt: "深色",
+        skip_link: "跳过主内容",
         nav_about: "关于", nav_exp: "经历", nav_projects: "项目", nav_skills: "技能", nav_edu: "教育", nav_contact: "联系",
         hero_tag: "AI / ML · 后端工程师 · UMD CS '26",
         hero_tagline: "构建可落地的 AI 系统。",
@@ -1352,13 +1378,13 @@
         stat3: "基于 RAG 的 QA 智能体 Recall",
         stat4: "热成像分类模型准确率提升",
         exp_label: "02 — 经历", exp_h2: "工作经历",
-        job1_period: "2025年6月 — 2025年8月\n远程", job1_company: "BYTEDANCE", job1_title: "软件工程实习 — 后端",
+        job1_period: "2025年6月—8月\n远程", job1_company: "BYTEDANCE", job1_title: "软件工程实习 — 后端",
         job1_b1: "设计并开发高并发分布式订单管理系统的可扩展 RESTful API，使用 Java 与 Spring Boot，在高峰时段稳定支持高并发请求。",
         job1_b2: "通过分析慢 SQL 执行计划并引入分布式 Redis 缓存层优化数据库性能，API 读取延迟平均降低 40%，显著减轻主库负载。",
         job1_b3: "使用 Apache Kafka 构建异步数据管道，将通知下发、日志等非核心逻辑与主事务流解耦，提升系统容错与响应速度。",
         job1_b4: "使用 JUnit 与 Mockito 编写测试套件，代码覆盖率达 85%+，并与 CI/CD 部署流水线无缝集成。",
         job1_b5: "参与生产问题排查与系统监控、日志分析，积累 JVM 内存调优与线程池优化经验，解决间歇性性能瓶颈。",
-        job2_period: "2024年5月 — 2024年8月\n深圳", job2_company: "EVERSTAY TECH", job2_title: "机器学习实习",
+        job2_period: "2024年5月—8月\n深圳", job2_company: "EVERSTAY TECH", job2_title: "机器学习实习",
         job2_b1: "使用 PyTorch 与 JAX 构建多模态 LLM 重排序模型，提升生产基准与评估中的相关性表现。",
         job2_b2: "应用图像与视频 tokenization 压缩输入，提升吞吐并降低 GPU 显存占用。",
         job2_b3: "实现 instruction-tuning 与 DPO/IPO 流程，在评估指标上提升有用性与事实性。",
@@ -1366,7 +1392,7 @@
         job2_b5: "设计实验与统计分析，开展带置信区间的 A/B 测试与校准指标评估。",
         job2_b6: "集成开放词表理解与安全护栏，增强生产系统中多模态的可靠性。",
         job2_b7: "与产品、基础设施团队跨职能协作，交付可复现的流水线与评估套件。",
-        job3_period: "2022年9月 — 2023年1月", job3_company: "AERODYNAMICS LABORATORY", job3_title: "研究助理",
+        job3_period: "2022年9月—2023年1月", job3_company: "AERODYNAMICS LABORATORY", job3_title: "研究助理",
         job3_b1: "独立开发基于 Python 的标准化数据预处理流程，清洗与标注 5000+ 红外图像；引入领域数据增强使训练集扩大三倍，显著提升模型泛化。",
         job3_b2: "构建可复现的 ML 训练流程与自动化评估工具（混淆矩阵与 mAP），推动热成像分类模型准确率提升 15%，并缩短算法迭代周期。",
         proj_label: "03 — 项目", proj_h2: "我的项目",
