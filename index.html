@@ -154,6 +154,35 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--lime); }
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--lime);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .nav-hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
 
   /* HERO */
   #hero {
@@ -653,10 +682,54 @@
     .skills-grid { grid-template-columns: 1fr; gap: 2rem; }
     .job { grid-template-columns: 1fr; gap: 0.3rem; }
     nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1rem; }
     section { padding: 4rem 1.5rem; }
     .contact-center { padding: 4rem 1.5rem; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-hamburger { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 53px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      padding: 1rem 1.5rem 1.5rem;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(-100%);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s, pointer-events 0.3s;
+      z-index: 99;
+      max-height: calc(100vh - 53px);
+      overflow-y: auto;
+    }
+    .nav-links.open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .nav-links a,
+    .nav-links .theme-toggle {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      width: 100%;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+    .nav-links .theme-toggle {
+      margin-top: 0.5rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      border-bottom: none;
+    }
+    .nav-links a:last-of-type { border-bottom: none; }
   }
 </style>
 </head>
@@ -668,7 +741,10 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">MY.</div>
-  <div class="nav-links">
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
     <a href="#about">About</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
@@ -1038,6 +1114,24 @@
       });
     }
   })();
+
+  // Mobile nav hamburger
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks = document.getElementById('navLinks');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', navLinks.classList.contains('open'));
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 
   // Scroll reveal animation
   const reveals = document.querySelectorAll('.reveal');
